@@ -8,4 +8,4 @@ router.get("/:id",userController.getIdUser)
 
 router.post("/insertUser", userController.postUser);
 
-module.exports = router;
+module.exports = router; 

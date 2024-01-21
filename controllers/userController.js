@@ -1,14 +1,20 @@
 const User = require("../models/userModel");
 
 exports.getUser = (req, res) => {
-    res.status(200).json({message: "get user"})};
+    User.find().then(dataUser => {
+        res.json({users: dataUser})
+    })}
 
 exports.getIdUser =  (req, res) =>{
-    const id = req.params.id;
-    res.status(200).json({
-        id: id
-    });
-};
+    console.log(req.params.id)
+    User.findOne({_id: req.params.id}).then(idUser =>{
+        if(idUser){
+            res.json({result: true, id_user: idUser});
+        } else {
+            res.json({result: false, error: "Pas de user sur cet id"})
+        }
+    })
+}
 
 exports.postUser = (req, res) => {
     const body = req.body;
@@ -26,5 +32,4 @@ exports.postUser = (req, res) => {
     } else {
         console.log('Erreur lors de la requête POST/USER');
     }
-
 };
