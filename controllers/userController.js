@@ -12,7 +12,6 @@ exports.getIdUser =  (req, res) =>{
 
 exports.postUser = (req, res) => {
     const body = req.body;
-    console.log("req.body --->", body);
     if(body){
         const user = new User({
             name: body.name,
@@ -25,7 +24,7 @@ exports.postUser = (req, res) => {
         })
         .catch((error) => {return  res.status(400).json({error})})
     } else {
-        console.log('va niquer tes morts');
+        console.log('Erreur lors de la requête POST/USER');
     }
 
 };
