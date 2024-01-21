@@ -11,11 +11,21 @@ exports.getIdUser =  (req, res) =>{
 };
 
 exports.postUser = (req, res) => {
-    console.log(req.body);
-    const user = new User(req.body);
+    const body = req.body;
+    console.log("req.body --->", body);
+    if(body){
+        const user = new User({
+            name: body.name,
+            mail: body.mail,
+            password: body.password,
+        });
+        
+        user.save().then((user) => {
+            return res.status(201).json({user})
+        })
+        .catch((error) => {return  res.status(400).json({error})})
+    } else {
+        console.log('va niquer tes morts');
+    }
 
-    user.save().then((user) => {
-        return res.status(201).json({user})
-    })
-    .catch((error) => {return  res.status(400).json({error})})
 };
