@@ -7,7 +7,6 @@ exports.getUser = (req, res) => {
 };
 
 exports.getIdUser = (req, res) => {
-    console.log(req.params.id);
     User.findOne({ _id: req.params.id }).then((idUser) => {
         if (idUser) {
             res.json({ result: true, id_user: idUser });
