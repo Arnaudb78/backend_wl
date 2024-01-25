@@ -1,7 +1,6 @@
 require("dotenv").config();
 require("./models/connection");
 const express = require("express");
-const bodyParser = require("body-parser");
 const users = require("./routes/userRoute");
 
 const app = express();
@@ -12,6 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", users);
+// app.use("/api/open");
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

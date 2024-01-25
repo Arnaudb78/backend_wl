@@ -19,7 +19,7 @@ exports.getIdUser = (req, res) => {
 
 exports.postUser = (req, res) => {
     const body = req.body;
-    console.log(body);
+    // console.log(body);
     if (body) {
         const user = new User({
             name: body.name,
