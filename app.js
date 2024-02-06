@@ -1,10 +1,14 @@
 require("dotenv").config();
 require("./config/connection");
 const express = require("express");
+const cors = require('cors');
 const users = require("./routes/userRoute");
 const open = require("./routes/apiOpenRoute");
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 app.use(express.json());
 
 app.get("/", (req, res) => {
