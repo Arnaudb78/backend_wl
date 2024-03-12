@@ -1,4 +1,4 @@
-const Open = require("../models/openModel");
+const Open = require("../models/weatherModel");
 
 exports.saveLoc = (req, res) => {
     const body = req.body;
