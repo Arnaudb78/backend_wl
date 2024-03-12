@@ -1,22 +1,26 @@
 {
-  "name": "backend_wl",
-  "version": "1.0.0",
-  "description": "red project b3dev",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Arnaud Beaulieu",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.2",
-    "express": "^4.18.2",
-    "mongoose": "^8.1.0",
-    "nodemon": "^3.0.3"
-  },
-  "devDependencies": {
-    "typescript": "^5.3.3"
-  }
+    "name": "backend_wl",
+    "version": "1.0.0",
+    "description": "red project b3dev",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Arnaud Beaulieu",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.2",
+        "express": "^4.18.2",
+        "mongoose": "^8.1.0"
+    },
+    "devDependencies": {
+        "@tsconfig/recommended": "^1.0.3",
+        "@types/node": "^20.11.26",
+        "nodemon": "^3.0.3",
+        "tsx": "^4.7.1",
+        "typescript": "^5.4.2"
+    }
 }
