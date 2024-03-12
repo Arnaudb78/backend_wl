@@ -2,11 +2,11 @@
     "name": "backend_wl",
     "version": "1.0.0",
     "description": "red project b3dev",
-    "main": "app.ts",
+    "main": "src/app.ts",
     "type": "module",
     "scripts": {
-        "dev": "nodemon --exec tsx app.ts",
-        "start": "NODE_ENV=production tsx app.ts",
+        "dev": "nodemon --watch src --exec tsx src/app.ts",
+        "start": "NODE_ENV=production tsx src/app.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Arnaud Beaulieu",
