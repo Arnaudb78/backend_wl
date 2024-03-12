@@ -1,12 +1,13 @@
-const User = require("../models/userModel");
+import { Request, Response } from "express";
+import User from "../models/userModel";
 
-exports.getUser = (req, res) => {
+const getUser = (req: Request, res: Response) => {
     User.find().then((dataUser) => {
         res.json({ users: dataUser });
     });
 };
 
-exports.getIdUser = (req, res) => {
+const getUserById = (req: Request, res: Response) => {
     User.findOne({ _id: req.params.id }).then((idUser) => {
         if (idUser) {
             res.json({ result: true, id_user: idUser });
@@ -16,9 +17,8 @@ exports.getIdUser = (req, res) => {
     });
 };
 
-exports.postUser = (req, res) => {
+const createUser = (req: Request, res: Response) => {
     const body = req.body;
-    // console.log(body);
     if (body) {
         const user = new User({
             name: body.name,
@@ -37,3 +37,5 @@ exports.postUser = (req, res) => {
         console.log("Erreur lors de la requête POST/USER");
     }
 };
+
+export { getUser, getUserById, createUser };

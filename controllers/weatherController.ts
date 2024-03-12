@@ -1,9 +1,10 @@
-const Open = require("../models/weatherModel");
+import { Request, Response } from "express";
+import Weather from "../models/weatherModel";
 
-exports.saveLoc = (req, res) => {
+const saveLoc = (req: Request, res: Response) => {
     const body = req.body;
     if (body) {
-        const open = new Open({
+        const open = new Weather({
             lat: body.lat,
             lon: body.lon,
             date: body.date,
@@ -20,3 +21,5 @@ exports.saveLoc = (req, res) => {
         console.log("Erreur lors de la requête POST/OPEN");
     }
 };
+
+export { saveLoc };
