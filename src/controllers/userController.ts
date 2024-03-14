@@ -23,7 +23,6 @@ const createUser = (req: Request, res: Response) => {
         const user = new User({
             name: body.name,
             mail: body.mail,
-            password: body.password,
         });
 
         user.save()
