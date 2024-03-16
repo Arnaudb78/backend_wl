@@ -7,22 +7,23 @@ const getUser = (req: Request, res: Response) => {
     });
 };
 
-const getUserById = (req: Request, res: Response) => {
-    User.findOne({ _id: req.params.id }).then((idUser) => {
-        if (idUser) {
-            res.json({ result: true, id_user: idUser });
-        } else {
-            res.json({ result: false, error: "Pas de user sur cet id" });
-        }
+const getUserByEmail = (req: Request, res: Response) => {
+    console.log(req.params.email);
+    User.findOne({ email: req.params.email }).then((emailUser) => {
+        if (!emailUser) res.json({ result: false, error: "Pas de user sur cet email" });
+        
+        res.json({ result: true, email: emailUser });
     });
 };
 
 const createUser = (req: Request, res: Response) => {
     const body = req.body;
-    if (body) {
+    if(!body) throw new Error("No body found in request.");
+    if(body.email_verified === false) return false;
+   
         const user = new User({
             name: body.name,
-            mail: body.mail,
+            mail: body.email,
         });
 
         user.save()
@@ -32,9 +33,6 @@ const createUser = (req: Request, res: Response) => {
             .catch((error) => {
                 return res.status(400).json({ error });
             });
-    } else {
-        console.log("Erreur lors de la requête POST/USER");
-    }
 };
 
-export { getUser, getUserById, createUser };
+export { getUser, getUserByEmail, createUser };

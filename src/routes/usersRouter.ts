@@ -1,11 +1,11 @@
-import { getUser, getUserById, createUser } from "../controllers/userController";
+import { getUser, getUserByEmail, createUser } from "../controllers/userController";
 import { Router } from "express";
 
 const router = Router();
 
 router.get("/", getUser);
 
-router.get("/:id", getUserById);
+router.get("/email", getUserByEmail);
 
 router.post("/", createUser);
 
