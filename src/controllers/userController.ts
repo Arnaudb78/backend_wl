@@ -8,8 +8,8 @@ const getUser = (req: Request, res: Response) => {
 };
 
 const getUserByEmail = (req: Request, res: Response) => {
-    console.log(req.params.email);
-    User.findOne({ email: req.params.email }).then((emailUser) => {
+    console.log('req.body.email', req.body.email)
+    User.findOne({ email: req.body.email }).then((emailUser) => {
         if (!emailUser) res.json({ result: false, error: "Le user n'existe pas en Db" });
         
         res.json({ result: true, email: emailUser });

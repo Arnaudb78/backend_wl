@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import usersRouter from "./routes/usersRouter";
 import weatherRouter from "./routes/weatherRouter";
-import { googleAuth } from "./config/Oauth";
+
 dotenv.config();
 setupDBConnection();
 
@@ -20,8 +20,6 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
     res.status(200).send("Backend online");
 });
-
-app.post("/google-auth", googleAuth);
 
 app.use("/user", usersRouter);
 app.use("/api", weatherRouter);

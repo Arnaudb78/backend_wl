@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/", getUser);
 
-router.get("/email", getUserByEmail);
+router.post("/email", getUserByEmail);
 
 router.post("/", createUser);
 
