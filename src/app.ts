@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import "express-async-errors";
 import dotenv from "dotenv";
 import setupDBConnection from "./config/connection";
 import express from "express";
@@ -23,6 +24,12 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/user", usersRouter);
 app.use("/api", weatherRouter);
+
+app.use((err: Error, req: Request, res: Response, next: Function) => {
+    console.log("AAAAAA", err.message);
+    res.status(500).json({ error: err.message });
+    next();
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
