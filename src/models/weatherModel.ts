@@ -5,6 +5,11 @@ const weatherDataSchema = new mongoose.Schema({
     lon: Number,
     city: String,
     date: String,
+    desc: String,
+    temp: Number,
+    temp_min: Number,
+    temp_max: Number,
+    humidity: Number,
 });
 
 export default mongoose.model("weatherData", weatherDataSchema);
