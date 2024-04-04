@@ -31,7 +31,7 @@ app.use((err: Error, req: Request, res: Response, next: Function) => {
     next();
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 app.listen(port, () => {
     console.log("Server online !");
 });
