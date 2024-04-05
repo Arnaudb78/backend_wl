@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const weatherDataSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
     lat: Number,
     lon: Number,
     city: String,
