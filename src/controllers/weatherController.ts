@@ -43,4 +43,28 @@ const saveLoc = async (req: Request, res: Response) => {
     }
 };
 
-export { saveLoc };
+const weatherHistory = async (req: Request, res: Response) => {
+    const { email } = req.query;
+    if (!email) throw new Error("Missing parameters");
+
+    const user = await User.findOne({ mail: email });
+    const userId = user?._id;
+
+    if (!user) throw new Error("User not found");
+
+    const data = await Weather.find({ user: userId });
+    if (!data) throw new Error("No data found");
+    res.status(200).json(
+        data.map((d) => ({
+            city: d.city,
+            date: d.date,
+            desc: d.desc,
+            temp: d.temp,
+            temp_min: d.temp_min,
+            temp_max: d.temp_max,
+            humidity: d.humidity,
+        }))
+    );
+};
+
+export { saveLoc, weatherHistory };
