@@ -16,8 +16,8 @@ MongoDB ou une base de données NoSQL compatible avec ExpressJS
 
 Clonez les dépôts depuis GitHub.
 
-FRONTEND_URL -> git clone
-BACKEND_URL -> git clone
+FRONTEND_URL -> `https://github.com/Arnaudb78/frontend_wl.git`
+BACKEND_URL -> git clone `https://github.com/Arnaudb78/backend_wl.git`
 
 # Installez les dépendances pour le frontend et le backend.
 
