@@ -3,6 +3,8 @@ import Weather from "../models/weatherModel";
 import User from "../models/userModel";
 import axios, { AxiosResponse } from "axios";
 
+const NEW_ENTRY_THROTTLE = 1800000; // 30 minutes in milliseconds
+
 const saveLoc = async (req: Request, res: Response) => {
     try {
         const { lat, lon, email } = req.body;
@@ -12,7 +14,16 @@ const saveLoc = async (req: Request, res: Response) => {
         const userId = user?._id;
 
         const weather = await Weather.findOne({ lat: lat, lon: lon });
-        if (weather) return res.status(200).json(weather);
+
+        if (weather?.date) {
+            const weatherDate = Date.parse(weather.date);
+            const dateNow = new Date().getTime();
+
+            if (dateNow < weatherDate + NEW_ENTRY_THROTTLE) {
+                console.log("Request throttled");
+                return res.status(200).json(weather);
+            }
+        }
 
         const apiKey = process.env.OP_API_KEY;
         if (!apiKey) throw new Error("Missing API key");
