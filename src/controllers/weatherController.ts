@@ -16,11 +16,8 @@ const saveLoc = async (req: Request, res: Response) => {
         const weather = await Weather.findOne({ lat: lat, lon: lon });
 
         if (weather?.date) {
-            const weatherDate = Date.parse(weather.date);
             const dateNow = new Date().getTime();
-
-            if (dateNow < weatherDate + NEW_ENTRY_THROTTLE) {
-                console.log("Request throttled");
+            if (dateNow < weather.date + NEW_ENTRY_THROTTLE) {
                 return res.status(200).json(weather);
             }
         }
@@ -39,7 +36,7 @@ const saveLoc = async (req: Request, res: Response) => {
             lat: lat,
             lon: lon,
             city: weatherObject["name"],
-            date: new Date().toISOString(),
+            date: new Date().getTime(),
             desc: weatherObject["weather"][0]["description"],
             temp: weatherObject["main"]["temp"],
             temp_min: weatherObject["main"]["temp_min"],
@@ -50,7 +47,7 @@ const saveLoc = async (req: Request, res: Response) => {
         await newWeather.save();
         res.status(201).json(newWeather);
     } catch (error: any) {
-        console.log("Request error -->", error.message);
+        throw new Error(error.message);
     }
 };
 

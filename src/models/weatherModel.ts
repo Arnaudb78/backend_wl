@@ -8,7 +8,7 @@ const weatherDataSchema = new mongoose.Schema({
     lat: Number,
     lon: Number,
     city: String,
-    date: String,
+    date: Number,
     desc: String,
     temp: Number,
     temp_min: Number,
