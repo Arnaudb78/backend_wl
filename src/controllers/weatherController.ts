@@ -30,7 +30,6 @@ const saveLoc = async (req: Request, res: Response) => {
 
         const weatherResponse: AxiosResponse = response;
         const weatherObject = weatherResponse.data;
-        console.log("Weather response -->", weatherObject);
         const newWeather = new Weather({
             user: userId,
             lat: lat,
