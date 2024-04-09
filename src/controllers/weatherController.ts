@@ -13,7 +13,7 @@ const saveLoc = async (req: Request, res: Response) => {
         const response = await axios.post(apiUrl);
         const weatherResponse: AxiosResponse = response;
         const weatherObject = weatherResponse.data;
-
+        console.log("Weather response -->", weatherObject);
         const newWeather = new Weather({
             lat: lat,
             lon: lon,
