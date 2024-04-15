@@ -3,9 +3,9 @@ import Weather from "../models/weatherModel";
 import User from "../models/userModel";
 import axios, { AxiosResponse } from "axios";
 
-const NEW_ENTRY_THROTTLE = 1800000; // 30 minutes in milliseconds
-
 const saveLoc = async (req: Request, res: Response) => {
+    const dateNow = new Date().getTime();
+
     try {
         const { lat, lon, email } = req.body;
         if (!lat || !lon || !email) throw new Error("Missing parameters");
@@ -13,11 +13,10 @@ const saveLoc = async (req: Request, res: Response) => {
         const user = await User.findOne({ mail: email });
         const userId = user?._id;
 
-        const weather = await Weather.findOne({ lat: lat, lon: lon });
-
-        if (weather?.date) {
-            const dateNow = new Date().getTime();
-            if (dateNow < weather.date + NEW_ENTRY_THROTTLE) {
+        const weather = await Weather.findOne({ lat: lat, lon: lon, user: userId }).sort({ date: -1 }); // Get the latest weather data
+        if (weather) {
+            const thresholdDate = weather?.date! + 600000; // 10 minutes
+            if (thresholdDate > dateNow) {
                 return res.status(200).json(weather);
             }
         }
@@ -35,7 +34,7 @@ const saveLoc = async (req: Request, res: Response) => {
             lat: lat,
             lon: lon,
             city: weatherObject["name"],
-            date: new Date().getTime(),
+            date: dateNow,
             desc: weatherObject["weather"][0]["description"],
             temp: weatherObject["main"]["temp"],
             temp_min: weatherObject["main"]["temp_min"],
