@@ -1,11 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/userModel";
 
-const getUser = (req: Request, res: Response) => {
-    User.find().then((dataUser) => {
-        res.json({ users: dataUser });
-    });
-};
 
 const getUserByEmail = async (req: Request, res: Response) => {
     if (!req.query.email) throw new Error("No params on request.");
@@ -33,4 +28,4 @@ const createUser = (req: Request, res: Response) => {
         });
 };
 
-export { getUser, getUserByEmail, createUser };
+export { getUserByEmail, createUser };
